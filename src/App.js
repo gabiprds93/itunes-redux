@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {connect} from 'redux-zero/react'
-import {play, next} from './actions'
+import {play, next, stop} from './actions'
 
 const Song = ({index, song}) => {
   let current = "";
@@ -28,7 +28,7 @@ const App = ({songs}) =>
       </ol>
       <button id="play" onClick={() => play()}>Play</button>
       <button id="next" onClick={() => next()}>Next</button>
-      <button id="stop">Stop</button>
+      <button id="stop" onClick={() => stop()}>Stop</button>
     </div>
   );
 }

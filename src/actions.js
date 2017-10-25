@@ -2,38 +2,40 @@ import store from './store'
 
 export const play = () =>
 {
-    let newSongs = store.getState().songs;
+    let newSongs = [...store.getState().songs];
     let nowPlayingIndex = store.getState().nowPlayingIndex;
     console.log("entra play");
     newSongs[nowPlayingIndex].isPlaying = true;
     console.log("songs", newSongs);    
     store.setState({
-        songs: newSongs,
-     })
+        songs: newSongs
+    })
 }
-/*
+
 export const stop = () =>
 {
-    let songs = store.getState().songs;
-    let nowPlayingIndex = store.getState().nowPlayingIndex;
-    var currentSong = this.songs[this.nowPlayingIndex];
-    currentSong.stop();
+    let newSongs = [...store.getState().songs];
+    let newNowPlayingIndex = store.getState().nowPlayingIndex;
+    newSongs[newNowPlayingIndex].isPlaying = false;
+    console.log("songs", newSongs);    
+    store.setState({
+        songs: newSongs
+     })
 }
-*/
+
 export const next = () => 
 {
-    let songs = store.getState().songs;
+    let newSongs = store.getState().songs;
     let newNowPlayingIndex = store.getState().nowPlayingIndex + 1;
-    //this.stop();
+    stop();
+    if(newNowPlayingIndex === newSongs.length) 
+    {
+        newNowPlayingIndex = 0;
+    }
     store.setState({
         nowPlayingIndex: newNowPlayingIndex,
     })
-    if(newNowPlayingIndex === songs.length) 
-    {
-        store.setState({
-            nowPlayingIndex: 0,
-        })
-    }
+    console.log("idex", newNowPlayingIndex);            
     play();
 }
 /*
